@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="egovframework.example.sample.service.file.impl.FileMapper">
+    
+    <select id="getFileByBno" resultType="fileVO">
+        SELECT BNO, RNO, FILE_NAME, REGDATE FROM file WHERE BNO LIKE #{BNO} ORDER BY BNO ASC
+    </select>
+   
+    <insert id="insertFile">
+        INSERT INTO file (BNO, RNO, FILE_NAME, REGDATE)
+        VALUES (#{BNO}, #{RNO}, #{FILE_NAME}, CURRENT_TIMESTAMP)
+    </insert>
+    
+    <delete id="deleteFileByBno">
+        DELETE FROM file WHERE BNO LIKE #{BNO}
+    </delete>    
+	
+</mapper>

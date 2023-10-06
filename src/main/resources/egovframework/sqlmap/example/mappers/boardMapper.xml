@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="egovframework.example.sample.service.board.impl.BoardMapper">
+	
+	<select id="getAllBoardContent" resultType="boardVO">
+		SELECT BNO, WRITER, TITLE, CONTENT, REGDATE, MODIDATE FROM board ORDER BY BNO ASC
+	</select>
+	
+	<select id="getBoardContentByKeyword" resultType="boardVO">
+        SELECT BNO, WRITER, TITLE, CONTENT, REGDATE FROM board WHERE TITLE LIKE #{keyword} OR CONTENT LIKE #{keyword} ORDER BY BNO ASC
+    </select>
+    
+    <select id="getBoardByBno" resultType="boardVO">
+        SELECT BNO, WRITER, TITLE, CONTENT, REGDATE, MODIDATE FROM board WHERE BNO LIKE #{BNO} ORDER BY BNO ASC
+    </select>
+    
+    <select id="getBnoByTitleAndWriter" resultType="integer">
+        SELECT BNO FROM board WHERE TITLE LIKE #{TITLE} AND WRITER LIKE #{WRITER} ORDER BY BNO ASC
+    </select>
+   
+    <insert id="insertBoardContent">
+        INSERT INTO board (WRITER, TITLE, CONTENT, REGDATE)
+        VALUES (#{WRITER}, #{TITLE}, #{CONTENT}, NOW())
+    </insert>
+    
+    <update id="updateBoardContent">
+    	UPDATE board 
+    	SET BNO = #{BNO}, WRITER = #{WRITER}, TITLE = #{TITLE}, CONTENT = #{CONTENT}, MODIDATE = NOW()
+    	WHERE BNO LIKE #{BNO} AND WRITER LIKE #{WRITER}
+    </update>
+    
+    <delete id="deleteBoardContentByBno"> 
+        DELETE FROM board WHERE BNO LIKE #{BNO}
+    </delete>    
+	
+</mapper>

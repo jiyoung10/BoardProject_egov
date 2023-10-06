@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="egovframework.example.sample.service.reply.impl.ReplyMapper">
+    
+    <select id="getReplyByBno" resultType="replyVO">
+        SELECT RNO, BNO, REPLYTEXT, REPLYER, REGDATE, MODIDATE FROM reply WHERE BNO LIKE #{BNO} ORDER BY RNO ASC
+    </select>
+  
+    <select id="getReplyByRno" resultType="replyVO">
+        SELECT RNO, BNO, REPLYTEXT, REPLYER, REGDATE, MODIDATE FROM reply WHERE RNO LIKE #{RNO} ORDER BY RNO ASC
+    </select>
+   
+    <insert id="insertReplyText">
+        INSERT INTO reply (BNO, REPLYTEXT, REPLYER, REGDATE, MODIDATE)
+        VALUES (#{BNO}, #{REPLYTEXT}, #{REPLYER}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+    </insert>
+    
+    <update id="updateReplyText">
+    	UPDATE reply 
+    	SET RNO = #{RNO}, BNO = #{BNO}, REPLYTEXT = #{REPLYTEXT}, REPLYER = #{REPLYER}, MODIDATE = CURRENT_TIMESTAMP
+    	WHERE RNO LIKE #{RNO} AND REPLYER LIKE #{REPLYER}
+    </update>
+    
+    <delete id="deleteReplyTextByRNO"> 
+        DELETE FROM reply WHERE RNO LIKE #{RNO}
+    </delete> 
+    
+    <delete id="deleteReplyByBno"> 
+        DELETE FROM reply WHERE BNO LIKE #{BNO}
+    </delete>
+   
+</mapper>
